@@ -83,7 +83,7 @@ public partial class FormMain : Form
         textBoxOutput.Text = string.Empty;
         for (int i = 0; i < sortedWeapons.Length; i++)
         {
-            textBoxOutput.AppendText($"{i + 1}. {sortedWeapons[i].Name} (Score: {sortedWeapons[i].Score})\r\n");
+            textBoxOutput.AppendText($"> {i + 1}. {sortedWeapons[i].Name} (Score: {sortedWeapons[i].Score})\r\n");
         }
 
     } // end UpdateOutput

@@ -1,2 +1,0 @@
-All weapon categories are ranked in order of their average weapons' scaling.
-Exceptions to the average scaling have their scaling recorded. All weapons matching the exact scaling are added to the rankings.
