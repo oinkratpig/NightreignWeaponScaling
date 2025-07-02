@@ -1,6 +1,8 @@
 # Nightreign Weapon Scaling
 Outputs a ranking of weapons' scaling based on the chosen Nightfarer.
 
+Weapon categoories are listed in square brackets. All specific weapons listed have different scaling than the average weapon within their category.
+
 Right now, this is the following algorithm for determining a weapon's score:
 `NightfarerGradeSTR*WeaponGradeSTR + NightfarerGradeDEX*WeaponGradeDEX + NightfarerGradeINT*WeaponGradeINT + NightfarerGradeFAI*WeaponGradeFAI + NightfarerGradeARC*WeaponGradeARC`
 The grade is converted to a numerical value (S being the highest number, no scaling being zero) for calculation purposes.
