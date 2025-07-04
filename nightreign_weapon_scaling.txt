@@ -1,4 +1,4 @@
-#Daggers,E,S,-,-,-
+#Dagger,E,S,-,-,-
 Duchess' Dagger,E,S,-,-,-
 Dagger,E,S,-,-,-
 Parrying Dagger,E,S,-,-,-
@@ -16,7 +16,7 @@ Glintstone Kris,E,A,D,-,-
 Reduvia,E,A,-,-,C
 Blade of Calling,E,A,-,D,-
 Black Knife,E,A,-,D,-
-#Straight Swords,B,B,-,-,-
+#Straight Sword,B,B,-,-,-
 Short Sword,B,B,-,-,-
 Longsword,B,B,-,-,-
 Broadsword,B,B,-,-,-
@@ -36,7 +36,7 @@ Sword of St Trina,C,C,C,-,-
 Regalia of Eochaid,C,C,-,-,C
 Coded Sword,-,-,-,S,-
 Sword of Night and Flame,C,C,C,C,-
-#Greatswords,B,C,-,-,-
+#Greatsword,B,C,-,-,-
 Wylder's Greatsword,B,C,-,-,-
 Bastard Sword,B,C,-,-,-
 Iron Greatsword,B,C,-,-,-
@@ -59,7 +59,7 @@ Blasphemous Blade,B,C,-,C,-
 Golden Order Greatsword,B,C,-,C,-
 Dark Moon Greatsword,B,C,C,-,-
 Sacred Relic Sword,B,C,-,C,-
-#Colossal Swords,A,C,-,-,-
+#Colossal Sword,A,C,-,-,-
 Zweihander,A,C,-,-,-
 Greatsword,A,C,-,-,-
 Watchdog's Greatsword,A,C,-,-,-
@@ -71,7 +71,7 @@ Grafted Blade Greatsword,A,C,-,-,-
 Ruins Greatsword,B,D,D,-,-
 Starscourge Greatsword,B,D,D,-,-
 Maliketh's Black Blade,B,D,-,D,-
-#Thrusting Swords,E,S,-,-,-
+#Thrusting Sword,E,S,-,-,-
 Rapier,E,S,-,-,-
 Estoc,E,S,-,-,-
 Noble's Estoc,E,S,-,-,-
@@ -79,12 +79,12 @@ Cleanrot Knight's Sword,E,S,-,-,-
 Rogier's Rapier,E,S,-,-,-
 Antspur Rapier,E,S,-,-,-
 Frozen Needle,E,S,-,-,-
-#Heavy Thrusting Swords,C,B,-,-,-
+#Heavy Thrusting Sword,C,B,-,-,-
 Great Epee,C,B,-,-,-
 Godskin Stitcher,C,B,-,-,-
 Bloody Helice,C,B,-,-,C
 Dragon King's Cragblade,C,B,-,-,-
-#Curved Swords,D,A,-,-,-
+#Curved Sword,D,A,-,-,-
 Scimitar,D,A,-,-,-
 Falchion,D,A,-,-,-
 Bandit's Curved Sword,D,A,-,-,-
@@ -100,7 +100,7 @@ Magma Blade,D,B,-,D,-
 Nox Flowing Sword,D,A,-,-,-
 Wing of Astel,D,B,D,-,-
 Eclipse Shotel,D,B,-,D,-
-#Curved Greatswords,E,S,-,-,-
+#Curved Greatsword,E,S,-,-,-
 Dismounter,E,S,-,-,-
 Omen Cleaver,E,S,-,-,-
 Monk's Flameblade,E,S,-,-,-
@@ -110,7 +110,7 @@ Onyx Lord's Greatsword,C,C,C,-,-
 Zamor Curved Sword,B,B,-,-,-
 Magma Wyrm's Scalesword,C,C,-,C,-
 Morgott's Cursed Sword,C,C,-,-,B
-#Katanas,E,S,-,-,-
+#Katana,E,S,-,-,-
 Executor's Blade,E,S,-,-,-
 Uchigatana,E,S,-,-,-
 Nagakiba,E,S,-,-,-
@@ -120,14 +120,14 @@ Moonveil,E,A,D,-,-
 Rivers of Blood,E,A,-,-,C
 Dragonscale Blade,E,S,-,-,-
 Hand of Malenia,E,S,-,-,-
-#Twinblades,C,B,-,-,-
+#Twinblade,C,B,-,-,-
 Twinblade,C,B,-,-,-
 Twinned Knight Swords,C,B,-,-,-
 Godskin Peeler,C,B,-,-,-
 Gargoyle's Twinblade,C,B,-,-,-
 Gargoyle's Black Blades,C,B,-,C,-
 Eleonora's Poleblade,C,B,-,-,B
-#Axes,B,C,-,-,-
+#Axe,B,C,-,-,-
 Hand Axe,B,C,-,-,-
 Forked Hatchet,B,C,-,-,-
 Battle Axe,B,C,-,-,-
@@ -141,7 +141,7 @@ Icerind Hatchet,B,C,-,-,-
 Sacrificial Axe,B,C,-,-,-
 Stormhawk Axe,B,C,-,-,-
 Rosus' Axe,C,B,D,-,-
-#Greataxes,S,E,-,-,-
+#Greataxe,S,E,-,-,-
 Greataxe,S,E,-,-,-
 Crescent Moon Axe,S,E,-,-,-
 Longhaft Axe,S,E,-,-,-
@@ -153,7 +153,7 @@ Gargoyle's Black Axe,A,E,-,D,-
 Butchering Knife,S,E,-,-,-
 Winged Greathorn,S,E,-,-,-
 Axe of Godrick,S,E,-,-,-
-#Hammers,A,D,-,-,-
+#Hammer,A,D,-,-,-
 Club,S,-,-,-,-
 Curved Club,A,D,-,-,-
 Stone Club,A,D,-,-,-
@@ -169,13 +169,13 @@ Nox Flowing Hammer,A,D,-,-,-
 Ringed Finger,A,D,-,-,-
 Scepter of the All-Knowing,B,D,D,-,-
 Marika's Hammer,B,D,-,D,-
-#Flails,C,B,-,-,-
+#Flail,C,B,-,-,-
 Flail,C,B,-,-,-
 Nightrider Flail,C,B,-,-,-
 Chainlink Flail,C,B,-,-,-
 Family Heads,C,B,D,-,-
 Bastard's Stars,C,B,D,-,-
-#Great Hammers,S,E,-,-,-
+#Great Hammer,S,E,-,-,-
 Large Club,S,-,-,-,-
 Curved Great Club,S,E,-,-,-
 Great Mace,S,E,-,-,-
@@ -190,7 +190,7 @@ Envoy's Long Horn,A,E,-,D,-
 Cranial Vesel Candlestand,A,E,-,D,-
 Beastclaw Greathammer,A,E,-,D,-
 Devourer's Scepter,A,E,-,D,-
-#Colossal Weapons,S,-,-,-,-
+#Colossal Weapon,S,-,-,-,-
 Raider's Greataxe,S,-,-,-,-
 Duelist Greataxe,S,-,-,-,-
 Rotten Greataxe,S,-,-,-,-
@@ -207,7 +207,7 @@ Envoy's Greathorn,A,-,-,D,-
 Ghiza's Wheel,S,-,-,-,-
 Fallingstar Beast Jaw,A,-,D,-,-
 Axe of Godfrey,S,-,-,-,-
-#Spears,C,B,-,-,-
+#Spear,C,B,-,-,-
 Short Spear,C,B,-,-,-
 Iron Spear,C,B,-,-,-
 Spear,C,B,-,-,-
@@ -224,14 +224,14 @@ Inquisitor's Girandole,C,B,-,C,-
 Cleanrot Spear,C,B,-,C,-
 Death Ritual Spear,C,B,C,-,-
 Bolt of Gransax,C,B,-,-,-
-#Great Spears,B,C,-,-,-
+#Great Spear,B,C,-,-,-
 Lance,B,C,-,-,-
 Treespear,C,B,-,D,-
 Serpent-Hunter,B,C,-,-,-
 Siluria's Tree,B,C,-,D,-
 Vyke's War Spear,B,C,-,D,-
 Mohgwyn's Sacred Spear,B,C,-,-,C
-#Halberds,B,C,-,-,-
+#Halberd,B,C,-,-,-
 Guardian's Halberd,B,C,-,-,-
 Halberd,B,C,-,-,-
 Banished Knight's Halberd,B,C,-,-,-
@@ -249,19 +249,19 @@ Golden Halberd,B,C,-,C,-
 Dragon Halberd,B,C,-,-,-
 Loretta's War Sickle,B,C,C,-,-
 Commander's Standard,B,C,-,-,-
-#Reapers,D,A,-,-,-
+#Reaper,D,A,-,-,-
 Scythe,D,A,-,-,-
 Grave Scythe,D,A,-,-,-
 Halo Scythe,D,B,-,D,-
 Winged Scythe,D,B,-,D,-
-#Whips,D,A,-,-,-
+#Whip,D,A,-,-,-
 Whip,D,A,-,-,-
 Thorned Whip,D,A,-,-,-
 Urumi,D,A,-,-,-
 Hoslow's Petal Whip,D,A,-,-,-
 Magma Whip Candlestick,D,A,-,D,-
 Giant's Red Braid,D,A,-,D,-
-#Fists,B,C,-,-,-
+#Fist,B,C,-,-,-
 Revenant's Cursed Claws,E,-,-,S,-
 Katar,B,C,-,-,-
 Caestus,B,C,-,-,-
@@ -272,7 +272,7 @@ Clinging Bone,B,C,-,-,B
 Veteran's Prosthesis,B,C,-,-,-
 Cipher Pata,-,-,-,S,-
 Grafted Dragon,B,C,-,C,-
-#Claws,D,A,-,-,-
+#Claw,D,A,-,-,-
 Hookclaws,D,A,-,-,-
 Bloodhound Claws,D,A,-,-,-
 Venemous Fang,D,A,-,-,-

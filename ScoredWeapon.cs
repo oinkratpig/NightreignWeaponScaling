@@ -11,7 +11,7 @@ namespace NightreignWeaponScaling;
 /// </summary>
 internal class ScoredWeapon
 {
-    public float Score { get; private set; }
+    public int Score { get; private set; }
     public string Name { get; private set; }
 
     public ScoredWeapon(string weaponName, ScalingSet scalings, Nightfarer nightfarer)

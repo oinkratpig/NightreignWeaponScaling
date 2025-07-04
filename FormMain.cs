@@ -1,9 +1,17 @@
+using System.Collections.Generic;
+using System.Drawing.Text;
 using System.Runtime.Intrinsics.X86;
 
 namespace NightreignWeaponScaling;
 
 public partial class FormMain : Form
 {
+    private enum OutputModes
+    {
+        Categories, Nightfarer
+    }
+
+    private OutputModes _outputMode;
     private List<Nightfarer> _nightfarers;
     private List<WeaponCategory> _weaponCategories;
 
@@ -32,6 +40,12 @@ public partial class FormMain : Form
         foreach (Nightfarer nightfarer in _nightfarers)
             comboBoxNightfarers.Items.Add(nightfarer.Name);
 
+        // Add output modes to combo box
+        foreach (string outputMode in Enum.GetNames(typeof(OutputModes)))
+            comboBoxOutputMode.Items.Add(outputMode);
+        comboBoxOutputMode.SelectedIndex = 0;
+        _outputMode = 0;
+
     } // end constructor
 
     /// <summary>
@@ -48,6 +62,24 @@ public partial class FormMain : Form
     } // end buttonBrowse_Click
 
     /// <summary>
+    /// Obsidian formatting checkbox changed.
+    /// </summary>
+    private void checkBoxObsidianFormat_CheckedChanged(object sender, EventArgs e)
+    {
+        UpdateOutput();
+
+    } // end checkBoxObsidianFormat_CheckedChanged
+
+    /// <summary>
+    /// Newline checkbox changed.
+    /// </summary>
+    private void checkBoxNewline_CheckedChanged(object sender, EventArgs e)
+    {
+        UpdateOutput();
+
+    } // end checkBoxNewline_CheckedChanged
+
+    /// <summary>
     /// Nightfarer drop-down box changed.
     /// </summary>
     private void comboBoxNightfarers_SelectedIndexChanged(object sender, EventArgs e)
@@ -56,11 +88,28 @@ public partial class FormMain : Form
 
     } // end comboBoxNightfarers_SelectedIndexChanged
 
-    // Update text output
+    /// <summary>
+    /// Output mode drop-down box changed.
+    /// </summary>
+    private void comboBoxOutputMode_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        _outputMode = (OutputModes)comboBoxOutputMode.SelectedIndex;
+        UpdateOutput();
+
+    } // end comboBoxOutputMode_SelectedIndexChanged
+
+    /// <summary>
+    /// Updates the text output.
+    /// </summary>
     private void UpdateOutput()
     {
         // Errors
-        if (comboBoxNightfarers.Text == string.Empty)
+        if (!File.Exists(textBoxFilePath.Text))
+        {
+            textBoxOutput.Text = "Invalid weapon info file path.";
+            return;
+        }
+        else if (comboBoxNightfarers.Text == string.Empty)
         {
             textBoxOutput.Text = "No Nightfarer is selected.";
             return;
@@ -73,43 +122,131 @@ public partial class FormMain : Form
 
         // Get Nightfarer
         Nightfarer nightfarer = null;
-        for(int i = 0; i < _nightfarers.Count; i++)
+        for (int i = 0; i < _nightfarers.Count; i++)
         {
-            if(comboBoxNightfarers.Text == _nightfarers[i].Name)
+            if (comboBoxNightfarers.Text == _nightfarers[i].Name)
                 nightfarer = _nightfarers[i];
         }
-        if(nightfarer == null)
+        if (nightfarer == null)
         {
             textBoxOutput.Text = "Invalid Nightfarer.";
             return;
         }
 
-        ScoredWeapon[] sortedWeapons = SortWeapons(nightfarer);
+        SortedDictionary<int, List<ScoredWeapon>> weaponsGroupedByScore = SortWeapons(nightfarer);
         textBoxOutput.Text = string.Empty;
-        for (int i = 0; i < sortedWeapons.Length; i++)
+        // Obsidian format 'header'
+        if (checkBoxObsidianFormat.Checked)
         {
-            textBoxOutput.AppendText($"> {i + 1}. {sortedWeapons[i].Name} (Score: {sortedWeapons[i].Score})\r\n");
+            textBoxOutput.AppendText("> [!abstract]- Weapon Scaling (highest to lowest)\r\n");
+            textBoxOutput.AppendText("> _(Calculated with [NightreignWeaponScaling](https://github.com/oinkratpig/NightreignWeaponScaling))._\r\n");
         }
+        int j = 1;
+        foreach (int score in weaponsGroupedByScore.Keys)
+        {
+            // Sort list
+            ScoredWeapon[] sortedWeapons = weaponsGroupedByScore[score].OrderBy(x => x.Name).ToArray();
+
+            // Print group
+            string line = string.Empty;
+            if (checkBoxObsidianFormat.Checked)
+                line += "> ";
+            // Grouped weapon scores are separated by commas
+            if (!checkBoxNewline.Checked)
+            {
+                line += $"{j}. ";
+                bool first = true;
+                foreach (ScoredWeapon weapon in sortedWeapons)
+                {
+                    if (!first)
+                        line += ", ";
+                    else
+                        first = false;
+                    line += weapon.Name;
+                }
+                line += "\r\n";
+            }
+            // Group scores are added to a new line
+            else
+            {
+                // Get letter displayed after a grouped rank
+                string bulletLetter(int index)
+                {
+                    char firstChar = 'A';
+                    int alphabetSize = 26;
+
+                    string result = string.Empty;
+                    while (index > 0)
+                    {
+                        index--;
+                        result = (char)(firstChar + (index % alphabetSize)) + result;
+                        index /= alphabetSize;
+                    }
+
+                    return result;
+                }
+
+                // Display each weapon on newline
+                int ind = 1;
+                foreach (ScoredWeapon weapon in sortedWeapons)
+                {
+                    bool includeChar = true;
+                    if (weaponsGroupedByScore[score].Count == 1)
+                        includeChar = false;
+                    line += $"{j}{((includeChar) ? bulletLetter(ind++) : "")}. {weapon.Name}\r\n";
+                }
+            }
+
+            // Escape square brackets if formatting for Obsidian
+            if (checkBoxObsidianFormat.Checked)
+                line = line.Replace("[", "**\\[").Replace("]", "\\]**");
+
+            textBoxOutput.AppendText(line);
+            j++;
+        }
+        textBoxOutput.Text = textBoxOutput.Text.Remove(textBoxOutput.Text.LastIndexOf(Environment.NewLine));
 
     } // end UpdateOutput
 
-    private ScoredWeapon[] SortWeapons(Nightfarer nightfarer)
+    /// <summary>
+    /// Returns weapons grouped together by score within a sorted dictionary.
+    /// </summary>
+    private SortedDictionary<int, List<ScoredWeapon>> SortWeapons(Nightfarer nightfarer)
     {
-        // List of all weapon scalings
-        List<ScoredWeapon> scoredWeapons = new List<ScoredWeapon>();
-        foreach(WeaponCategory weaponCategory in _weaponCategories)
+        SortedDictionary<int, List<ScoredWeapon>> groupedAndSorted = new();
+
+        // Add new weapon to a score group
+        void addToGroup(string weaponName, ScalingSet scalings)
         {
-            // Category's average scalings
-            scoredWeapons.Add(new ScoredWeapon($"[{weaponCategory.Name.ToUpper()}]", weaponCategory.AverageScalings, nightfarer));
-            // Individual, unqiue weapons
-            /*
-            foreach (Weapon uniqueWeapon in weaponCategory.UniquelyScaledWeapons)
-                scoredWeapons.Add(new ScoredWeapon(uniqueWeapon.Name, uniqueWeapon.Scalings, nightfarer));
-            */
+            ScoredWeapon weapon = new ScoredWeapon(weaponName, scalings, nightfarer);
+            int score = -weapon.Score;
+
+            // Group existing scores together
+            if (groupedAndSorted.ContainsKey(score))
+                groupedAndSorted[score].Add(weapon);
+            // New score
+            else
+                groupedAndSorted[score] = new() { weapon };
         }
 
-        // Sort list
-        return scoredWeapons.OrderByDescending(x => x.Score).ToArray();
+        // Group all weapon scalings by score within a sorted dictionary
+        foreach (WeaponCategory weaponCategory in _weaponCategories)
+        {
+            // Categories style
+            if (_outputMode == OutputModes.Categories)
+            {
+                addToGroup(weaponCategory.Name, weaponCategory.AverageScalings);
+            }
+            // Nightfarer style
+            else if (_outputMode == OutputModes.Nightfarer)
+            {
+                addToGroup($"[{weaponCategory.Name}]", weaponCategory.AverageScalings);
+                foreach (Weapon uniqueWeapon in weaponCategory.UniquelyScaledWeapons)
+                    addToGroup(uniqueWeapon.Name, uniqueWeapon.Scalings);
+            }
+        }
+
+        return groupedAndSorted;
 
     } // end RankWeapons
 
@@ -142,11 +279,11 @@ public partial class FormMain : Form
         // Parse lines
         _weaponCategories = new List<WeaponCategory>();
         WeaponCategory? weaponCategory = null;
-        foreach(string line in lines)
+        foreach (string line in lines)
         {
             // New weapon category
             // (Denoted by line starting with #)
-            if(line[0] == '#')
+            if (line[0] == '#')
             {
                 if (weaponCategory != null)
                     _weaponCategories.Add(weaponCategory);
@@ -155,7 +292,7 @@ public partial class FormMain : Form
                 weaponCategory = new WeaponCategory(lineInfo[0], char.Parse(lineInfo[1]), char.Parse(lineInfo[2]), char.Parse(lineInfo[3]), char.Parse(lineInfo[4]), char.Parse(lineInfo[5]));
             }
             // Tried to add weapon but no category
-            else if(weaponCategory == null)
+            else if (weaponCategory == null)
             {
                 textBoxOutput.Text = "Tried to add a weapon to a nonexistence weapon category. Something's wrong with your info file.";
                 break;
@@ -169,7 +306,7 @@ public partial class FormMain : Form
                     weaponCategory.UniquelyScaledWeapons.Add(weapon);
             }
         }
-        if(_weaponCategories != null)
+        if (_weaponCategories != null)
             _weaponCategories.Add(weaponCategory);
 
         // Update output

@@ -25,7 +25,7 @@ internal class Nightfarer
     /// <summary>
     /// Calculate a "score" for the weapon (or set of scalings) based on Nightfarer's scalings.
     /// </summary>
-    public float ScalingScore(ScalingSet scalings)
+    public int ScalingScore(ScalingSet scalings)
     {
         // L2 Normalization
         double[] norm(float[] stats)
@@ -37,7 +37,8 @@ internal class Nightfarer
         float[] nightfarerStats = { Scalings.Strength.Score, Scalings.Dexterity.Score, Scalings.Intelligence.Score, Scalings.Faith.Score, Scalings.Arcane.Score };
         float[] weaponStats = { scalings.Strength.Score, scalings.Dexterity.Score, scalings.Intelligence.Score, scalings.Faith.Score, scalings.Arcane.Score };
 
-        return (float) norm(nightfarerStats).Zip(norm(weaponStats), (a, b) => a * b).Sum();
+        double score = norm(nightfarerStats).Zip(norm(weaponStats), (a, b) => a * b).Sum();
+        return (int)Math.Round(score * 100);
 
     } // end WeaponScore
 
