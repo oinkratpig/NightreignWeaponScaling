@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,13 +25,19 @@ internal class Nightfarer
     /// <summary>
     /// Calculate a "score" for the weapon (or set of scalings) based on Nightfarer's scalings.
     /// </summary>
-    public int ScalingScore(ScalingSet scalings)
+    public float ScalingScore(ScalingSet scalings)
     {
-        return Scalings.Strength.Score * scalings.Strength.Score +
-            Scalings.Dexterity.Score * scalings.Dexterity.Score +
-            Scalings.Intelligence.Score * scalings.Intelligence.Score +
-            Scalings.Faith.Score * scalings.Faith.Score +
-            Scalings.Arcane.Score * scalings.Arcane.Score;
+        // L2 Normalization
+        double[] norm(float[] stats)
+        {
+            double len = Math.Sqrt(stats.Sum(s => s * s));
+            return stats.Select(s => s / len).ToArray();
+        }
+
+        float[] nightfarerStats = { Scalings.Strength.Score, Scalings.Dexterity.Score, Scalings.Intelligence.Score, Scalings.Faith.Score, Scalings.Arcane.Score };
+        float[] weaponStats = { scalings.Strength.Score, scalings.Dexterity.Score, scalings.Intelligence.Score, scalings.Faith.Score, scalings.Arcane.Score };
+
+        return (float) norm(nightfarerStats).Zip(norm(weaponStats), (a, b) => a * b).Sum();
 
     } // end WeaponScore
 

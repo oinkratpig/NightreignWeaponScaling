@@ -21,6 +21,11 @@ public partial class FormMain : Form
             new Nightfarer("Revenant", 'C', 'C', 'B', 'S', 'B'),
             new Nightfarer("Recluse", 'D', 'C', 'S', 'S', 'C'),
             new Nightfarer("Executor", 'C', 'S', 'D', 'D', 'S'),
+            new Nightfarer("Pure Strength", 'S', '-', '-', '-', '-'),
+            new Nightfarer("Pure Dexterity", '-', 'S', '-', '-', '-'),
+            new Nightfarer("Pure Balance", 'B', 'B', '-', '-', '-'),
+            new Nightfarer("Balance, Strength Bias", 'A', 'B', '-', '-', '-'),
+            new Nightfarer("Balance, Dexterity Bias", 'B', 'A', '-', '-', '-')
         ];
 
         // Add Nightfarers to combo box
@@ -97,8 +102,10 @@ public partial class FormMain : Form
             // Category's average scalings
             scoredWeapons.Add(new ScoredWeapon($"[{weaponCategory.Name.ToUpper()}]", weaponCategory.AverageScalings, nightfarer));
             // Individual, unqiue weapons
+            /*
             foreach (Weapon uniqueWeapon in weaponCategory.UniquelyScaledWeapons)
                 scoredWeapons.Add(new ScoredWeapon(uniqueWeapon.Name, uniqueWeapon.Scalings, nightfarer));
+            */
         }
 
         // Sort list

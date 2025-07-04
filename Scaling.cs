@@ -31,6 +31,8 @@ internal class Scaling
         }
     }
 
+    public float ScoreNormalized => Score / 6f;
+
     public Scaling(char grade)
     {
         Grade = char.ToUpper(grade);
